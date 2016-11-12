@@ -87,6 +87,7 @@ public class ZombieSim extends JFrame {
 	public static void main(String[] args) {
 		/* Create a new GUI window  */
 		new ZombieSim();
+
 	}
 
 }

@@ -3,6 +3,7 @@ package cs2113.zombies;
 import cs2113.util.Helper;
 
 import java.awt.Color;
+import java.util.ArrayList;
 
 
 public class City {
@@ -12,8 +13,9 @@ public class City {
 	 *  else the space is free. Humans should never go into spaces that
 	 *  have a wall.
 	 */
-	private boolean walls[][];
+	public static boolean walls[][];
 	private int width, height;
+	ArrayList<Humans> arrayH = new ArrayList<Humans>();
 
 	/**
 	 * Create a new City and fill it with buildings and people.
@@ -41,6 +43,23 @@ public class City {
 	private void populate(int numPeople)
 	{
 		// Generate numPeople new humans randomly placed around the city.
+		int xpos;
+		int ypos;
+		for(int i = 0; i<numPeople; i++){//this for loop makes 200 humans, assings them random
+			xpos = Helper.nextInt(width);//x and y values, then places them in an array list
+			ypos = Helper.nextInt(height);//
+			while(walls[xpos][ypos] == true) {
+				xpos = Helper.nextInt(width);//x and y values, then places them in an array list
+				ypos = Helper.nextInt(height);
+
+			}
+			Humans human = new Humans(xpos, ypos, this);
+			arrayH.add(human);
+
+
+
+		}
+
 	}
 
 
@@ -79,7 +98,14 @@ public class City {
 	 */
 	public void update() {
 		// Move humans, zombies, etc
-	}
+		for(int i = 0; i<arrayH.size(); i++)//this for loop goes through the arraylist
+		{
+			int x = arrayH.get(i).getXcoord();
+			int y = arrayH.get(i).getYcoord();
+
+				arrayH.get(i).moveHuman();        //and moves each human
+		}
+		}
 
 	/**
 	 * Draw the buildings and all humans.
@@ -87,10 +113,18 @@ public class City {
 	public void draw(){
 		/* Clear the screen */
 		ZombieSim.dp.clear(Color.black);
-
 		drawWalls();
-	}
+		ZombieSim.dp.setPenColor(Color.GREEN);//sets the color of the humans
+		for(int i =0; i<arrayH.size(); i++)//goes through the loop to draw each human at its coordinates
+		{
+			int x = arrayH.get(i).getXcoord();
+			int y = arrayH.get(i).getYcoord();
+			ZombieSim.dp.drawDot(x, y);
 
+		}
+
+
+		}
 	/**
 	 * Draw the buildings.
 	 * First set the color for drawing, then draw a dot at each space
@@ -109,5 +143,6 @@ public class City {
 			}
 		}
 	}
+
 
 }

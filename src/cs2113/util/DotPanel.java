@@ -123,6 +123,7 @@ public class DotPanel extends javax.swing.JPanel {
 		}
 	}
 
+
 	public  void clear() {
 		clear(BLACK);
 	}
