@@ -16,6 +16,7 @@ public class City {
 	public static boolean walls[][];
 	private int width, height;
 	ArrayList<Humans> arrayH = new ArrayList<Humans>();
+	ArrayList<Zombies> arrayZ = new ArrayList<Zombies>();
 
 	/**
 	 * Create a new City and fill it with buildings and people.
@@ -57,8 +58,16 @@ public class City {
 			arrayH.add(human);
 
 
-
 		}
+
+		xpos = Helper.nextInt(width);
+		ypos = Helper.nextInt(height);
+		while(walls[xpos][ypos] == true) {
+			xpos = Helper.nextInt(width);//x and y values, then places them in an array list
+			ypos = Helper.nextInt(height);
+		}
+		Zombies zombie = new Zombies(xpos, ypos, this);
+		arrayZ.add(zombie);
 
 	}
 
@@ -102,9 +111,15 @@ public class City {
 		{
 			int x = arrayH.get(i).getXcoord();
 			int y = arrayH.get(i).getYcoord();
-
-				arrayH.get(i).moveHuman();        //and moves each human
+			arrayH.get(i).moveHuman();        //and moves each human
 		}
+		for(int j =0; j< arrayZ.size(); j++)
+		{
+			int x = arrayZ.get(j).getXcoord();
+			int y = arrayZ.get(j).getYcoord();
+			arrayZ.get(j).moveZombie();
+		}
+
 		}
 
 	/**
@@ -122,7 +137,13 @@ public class City {
 			ZombieSim.dp.drawDot(x, y);
 
 		}
+		for(int j =0; j< arrayZ.size(); j++) {
 
+			ZombieSim.dp.setPenColor(Color.yellow);
+			int x = arrayZ.get(j).getXcoord();
+			int y = arrayZ.get(j).getYcoord();
+			ZombieSim.dp.drawDot(x, y);
+		}
 
 		}
 	/**

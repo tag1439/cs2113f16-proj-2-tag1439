@@ -1,12 +1,18 @@
 package cs2113.util;
 
+import cs2113.zombies.ZombieSim;
+import cs2113.zombies.Zombies;
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 
-public class DotPanel extends javax.swing.JPanel {
+public class DotPanel extends javax.swing.JPanel {//implements ActionListener{
 
 	// ignore this.
 	private static final long serialVersionUID = -2909151487015547533L;
@@ -123,6 +129,17 @@ public class DotPanel extends javax.swing.JPanel {
 		}
 	}
 
+
+
+	/*public void actionPerformed(ActionEvent actionEvent) {
+		ZombieSim.dp.setPenColor(Color.GREEN);
+		int x,y;
+		x = Helper.nextInt(width);
+		y = Helper.nextInt(height);
+		ZombieSim.add(new Zombies(x, y, city));
+		System.out.println("New dot at dot coordinate: " + x + ", " + y);
+	}
+	*/
 
 	public  void clear() {
 		clear(BLACK);

@@ -14,7 +14,7 @@ public class Humans {
     public Humans(int xcoord, int ycoord, City city){//makes a human with a position (x.y)
         this.xcoord = xcoord;
         this.ycoord = ycoord;
-        direction =0;//initializes direction to zerp, but updates it in move
+        direction = Helper.nextInt(4);//initializes direction to random
 
     }
 
@@ -22,15 +22,31 @@ public class Humans {
         int pickDir = Helper.nextInt(10);//generates a random number
 
             if (pickDir > 0) {
-                //if not zero, it will continue in the direction it is facing
-                if ((ycoord -1 > 0) && City.walls[xcoord][ycoord-1]==false && this.direction == 0)
-                    this.ycoord--;
-                if ((ycoord + 1 > City.walls[0].length) && City.walls[xcoord][ycoord + 1] ==false && this.direction == 1)
-                    this.ycoord++;
-                if ((xcoord-1 > 0) && City.walls[xcoord-1][ycoord] == false && this.direction == 2)
-                    this.xcoord--;
-                if ((xcoord+1 > City.walls.length) && City.walls[xcoord+1][ycoord] ==false && this.direction == 3)
-                    this.xcoord++;
+                //if not zero or one, it will continue in the direction it is facing
+                if ((ycoord - 1 > 0) && City.walls[xcoord][ycoord - 1] == false && this.direction == 0) {
+                    if (this.ycoord + 1 < Zombies.getYcoord() < 11 + this.ycoord)
+                        this.ycoord -= 2;
+                    else
+                        this.ycoord--;
+                }
+                if ((ycoord + 1 < City.walls[0].length) && City.walls[xcoord][ycoord + 1] ==false && this.direction == 1) {
+                    if (this.ycoord - 1 > Zombies.getYcoord() > 11 - this.ycoord)
+                        this.ycoord += 2;
+                    else
+                        this.ycoord++;
+                }
+                if ((xcoord-1 > 0) && City.walls[xcoord-1][ycoord] == false && this.direction == 2) {
+                    if (this.xcoord + 1 < Zombies.getXcoord() < 11 + this.xcoord)
+                        this.xcoord -= 2;
+                    else
+                        this.xcoord--;
+                }
+                if ((xcoord+1 < City.walls.length) && City.walls[xcoord+1][ycoord] ==false && this.direction == 3) {
+                    if (this.xcoord - 1 > Zombies.getXcoord() > 11 - this.xcoord)
+                        this.xcoord += 2;
+                    else
+                        this.xcoord++;
+                }
             }
             else{
                     pickDir = Helper.nextInt(4);
