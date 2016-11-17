@@ -32,8 +32,8 @@ public class ZombieSim extends JFrame implements MouseListener,KeyListener{
 
 	/* Define constants using static final variables */
 	public static final int MAX_X = 200;
-	public static final int MAX_Y = 100;
-	private static final int DOT_SIZE = 6;
+	public static final int MAX_Y = 200;
+	private static final int DOT_SIZE = 3;
 	private static final int NUM_HUMANS = 200;
 	private static final int NUM_BUILDINGS = 80;
 
