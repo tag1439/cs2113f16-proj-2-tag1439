@@ -15,8 +15,8 @@ public class City {
 	 */
 	public static boolean walls[][];
 	private int width, height;
-	ArrayList<Humans> arrayH = new ArrayList<Humans>();
-	ArrayList<Zombies> arrayZ = new ArrayList<Zombies>();
+	public static ArrayList<Humans> arrayH = new ArrayList<Humans>();
+	public static ArrayList<Zombies> arrayZ = new ArrayList<Zombies>();
 
 	/**
 	 * Create a new City and fill it with buildings and people.
@@ -29,7 +29,8 @@ public class City {
 		width = w;
 		height = h;
 		walls = new boolean[w][h];
-
+		arrayH.clear();
+		arrayZ.clear();
 		randomBuildings(numB);
 		populate(numP);
 	}
@@ -109,14 +110,10 @@ public class City {
 		// Move humans, zombies, etc
 		for(int i = 0; i<arrayH.size(); i++)//this for loop goes through the arraylist
 		{
-			int x = arrayH.get(i).getXcoord();
-			int y = arrayH.get(i).getYcoord();
 			arrayH.get(i).moveHuman();        //and moves each human
 		}
 		for(int j =0; j< arrayZ.size(); j++)
 		{
-			int x = arrayZ.get(j).getXcoord();
-			int y = arrayZ.get(j).getYcoord();
 			arrayZ.get(j).moveZombie();
 		}
 

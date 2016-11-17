@@ -4,6 +4,11 @@ import cs2113.util.DotPanel;
 
 import java.awt.Color;
 import java.awt.Container;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.security.Key;
 
 import javax.swing.JFrame;
 
@@ -18,7 +23,7 @@ import javax.swing.JFrame;
  * We will add additional rules for dealing with sighting or running into zombies later.
  */
 
-public class ZombieSim extends JFrame {
+public class ZombieSim extends JFrame implements MouseListener,KeyListener{
 
 	private static final long serialVersionUID = -5176170979783243427L;
 
@@ -27,11 +32,12 @@ public class ZombieSim extends JFrame {
 
 	/* Define constants using static final variables */
 	public static final int MAX_X = 200;
-	public static final int MAX_Y = 200;
-	private static final int DOT_SIZE = 3;
+	public static final int MAX_Y = 100;
+	private static final int DOT_SIZE = 6;
 	private static final int NUM_HUMANS = 200;
 	private static final int NUM_BUILDINGS = 80;
 
+	City world;
 
 
 	/*
@@ -60,9 +66,10 @@ public class ZombieSim extends JFrame {
 		dp.clear();
 		dp.setPenColor(Color.red);
 		this.setVisible(true);
-
+addMouseListener(this);
+		addKeyListener(this);
 		/* Create our city */
-		City world = new City(MAX_X, MAX_Y, NUM_BUILDINGS, NUM_HUMANS);
+		 world = new City(MAX_X, MAX_Y, NUM_BUILDINGS, NUM_HUMANS);
 
 		/* This is the Run Loop (aka "simulation loop" or "game loop")
 		 * It will loop forever, first updating the state of the world
@@ -90,4 +97,51 @@ public class ZombieSim extends JFrame {
 
 	}
 
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		if(!City.walls[e.getX()/DOT_SIZE][e.getY()/DOT_SIZE])
+		City.arrayZ.add(new Zombies(e.getX()/DOT_SIZE,e.getY()/DOT_SIZE,world));
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+
+	}
+	public void addNotify() {
+		super.addNotify();
+		requestFocus();
+	}
+	@Override
+	public void keyTyped(KeyEvent e) {
+
+		if(e.getKeyChar()=='r'){
+
+			world = new City(MAX_X, MAX_Y, NUM_BUILDINGS, NUM_HUMANS);
+		}
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+
+	}
 }

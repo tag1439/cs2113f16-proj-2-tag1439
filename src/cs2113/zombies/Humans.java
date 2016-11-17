@@ -19,52 +19,91 @@ public class Humans {
     }
 
     public void moveHuman(){
+        if(detect(10)){
+            if(direction==0)
+                direction=1;
+            if(direction==1)
+                direction=0;
+            if(direction==3)
+                direction=2;
+            if(direction==2)
+                direction=3;
+
+            move();
+            move();
+            return;
+        }
         int pickDir = Helper.nextInt(10);//generates a random number
 
             if (pickDir > 0) {
-                //if not zero or one, it will continue in the direction it is facing
-                if ((ycoord - 1 > 0) && City.walls[xcoord][ycoord - 1] == false && this.direction == 0) {
-                    if (this.ycoord + 1 < Zombies.getYcoord() < 11 + this.ycoord)
-                        this.ycoord -= 2;
-                    else
-                        this.ycoord--;
-                }
-                if ((ycoord + 1 < City.walls[0].length) && City.walls[xcoord][ycoord + 1] ==false && this.direction == 1) {
-                    if (this.ycoord - 1 > Zombies.getYcoord() > 11 - this.ycoord)
-                        this.ycoord += 2;
-                    else
-                        this.ycoord++;
-                }
-                if ((xcoord-1 > 0) && City.walls[xcoord-1][ycoord] == false && this.direction == 2) {
-                    if (this.xcoord + 1 < Zombies.getXcoord() < 11 + this.xcoord)
-                        this.xcoord -= 2;
-                    else
-                        this.xcoord--;
-                }
-                if ((xcoord+1 < City.walls.length) && City.walls[xcoord+1][ycoord] ==false && this.direction == 3) {
-                    if (this.xcoord - 1 > Zombies.getXcoord() > 11 - this.xcoord)
-                        this.xcoord += 2;
-                    else
-                        this.xcoord++;
-                }
+                move();
             }
             else{
+                do {
                     pickDir = Helper.nextInt(4);
+                }while(pickDir==this.direction);
                     //if zero, a new number is generated for the 4 possible directions that it changes to
                     //this is the 10% chance
-                    if (pickDir == 0)
-                        this.direction = 0;
-
-                    if (pickDir == 1)
-                        this.direction = 1;
-
-                    if (pickDir == 2)
-                        this.direction = 2;
-
-                    if (pickDir == 3)
-                        this.direction = 3;
+                    this.direction = pickDir;
 
                 }
+    }
+
+    public boolean detect(int range){
+
+        if (direction==0){
+            for(Zombies h:City.arrayZ){
+                if(h.getXcoord()==xcoord) {
+                    if(h.getYcoord()-ycoord<range&&h.getYcoord()-ycoord<0)
+                        return true;
+                }
+            }
+        }
+        else  if (direction==1){
+            for(Zombies h:City.arrayZ){
+                if(h.getXcoord()==xcoord) {
+                    if(h.getYcoord()-ycoord<range&&h.getYcoord()-ycoord>0)
+                        return true;
+                }
+            }
+        }
+        else  if (direction==2){
+            for(Zombies h:City.arrayZ){
+                if(h.getYcoord()==ycoord) {
+                    if(h.getXcoord()-xcoord<range&&h.getXcoord()-xcoord<0)
+                        return true;
+                }
+            }
+        }
+        else  if (direction==1){
+            for(Zombies h:City.arrayZ){
+                if(h.getYcoord()==ycoord) {
+                    if(h.getXcoord()-xcoord<range&&h.getXcoord()-xcoord>0)
+                        return true;
+                }
+            }
+        }
+        return false;
+    }
+    public void move(){
+
+        //if not zero or one, it will continue in the direction it is facing
+        if ((ycoord - 1 > 0) && City.walls[xcoord][ycoord - 1] == false && this.direction == 0) {
+
+            this.ycoord--;
+        }
+        if ((ycoord + 1 < City.walls[0].length-1) && City.walls[xcoord][ycoord + 1] ==false && this.direction == 1) {
+
+            this.ycoord++;
+        }
+        if ((xcoord-1 > 0) && City.walls[xcoord-1][ycoord] == false && this.direction == 2) {
+
+            this.xcoord--;
+        }
+        if ((xcoord+1 < City.walls.length-1) && City.walls[xcoord+1][ycoord] ==false && this.direction == 3) {
+
+            this.xcoord++;
+        }
     }
     public int getXcoord(){//gets the x coordinate
         return this.xcoord;//this method is found in City's draw method
