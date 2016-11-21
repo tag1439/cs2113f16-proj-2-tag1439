@@ -66,7 +66,7 @@ public class ZombieSim extends JFrame implements MouseListener,KeyListener{
 		dp.clear();
 		dp.setPenColor(Color.red);
 		this.setVisible(true);
-addMouseListener(this);
+		addMouseListener(this);
 		addKeyListener(this);
 		/* Create our city */
 		 world = new City(MAX_X, MAX_Y, NUM_BUILDINGS, NUM_HUMANS);
@@ -128,12 +128,19 @@ addMouseListener(this);
 	}
 	@Override
 	public void keyTyped(KeyEvent e) {
-
-		if(e.getKeyChar()=='r'){
+		boolean paused = true;
+		if(e.getKeyChar()==' '){
 
 			world = new City(MAX_X, MAX_Y, NUM_BUILDINGS, NUM_HUMANS);
 		}
-	}
+
+		else if(e.getKeyChar()== 'p') {
+			dp.repaintAndSleep(3000);
+		}
+
+
+		}
+
 
 	@Override
 	public void keyPressed(KeyEvent e) {

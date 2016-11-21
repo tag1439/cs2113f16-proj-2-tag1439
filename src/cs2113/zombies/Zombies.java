@@ -91,13 +91,13 @@ public class Zombies {
     }
     public void move(){
 
-        if ((ycoord - 1 > 0) && City.walls[xcoord][ycoord - 1] == false && this.direction == 0 /*&& Humans.getYcoord() < 11 + this.ycoord*/)
+        if ((ycoord - 1 > 0) && City.walls[xcoord][ycoord - 1] == false && this.direction == 0)
             this.ycoord--;
-        if ((ycoord + 1 < City.walls[0].length - 1) && City.walls[xcoord][ycoord + 1] == false && this.direction == 1 /*&& Humans.getYcoord() > 11 + this.ycoord*/)
+        if ((ycoord + 1 < City.walls[0].length - 1) && City.walls[xcoord][ycoord + 1] == false && this.direction == 1)
             this.ycoord++;
-        if ((xcoord - 1 > 0) && City.walls[xcoord - 1][ycoord] == false && this.direction == 2 /*&& Humans.getXcoord() < 11 + this.xcoord*/)
+        if ((xcoord - 1 > 0) && City.walls[xcoord - 1][ycoord] == false && this.direction == 2)
             this.xcoord--;
-        if ((xcoord + 1 < City.walls.length - 1) && City.walls[xcoord + 1][ycoord] == false && this.direction == 3 /*&& Humans.getXcoord() > 11 + this.xcoord*/)
+        if ((xcoord + 1 < City.walls.length - 1) && City.walls[xcoord + 1][ycoord] == false && this.direction == 3)
             this.xcoord++;
     }
     public int getXcoord(){//gets the x coordinate

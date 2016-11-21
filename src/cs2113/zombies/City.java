@@ -18,6 +18,7 @@ public class City {
 	public static ArrayList<Humans> arrayH = new ArrayList<Humans>();
 	public static ArrayList<Zombies> arrayZ = new ArrayList<Zombies>();
 
+
 	/**
 	 * Create a new City and fill it with buildings and people.
 	 * @param w width of city
@@ -58,7 +59,6 @@ public class City {
 			Humans human = new Humans(xpos, ypos, this);
 			arrayH.add(human);
 
-
 		}
 
 		xpos = Helper.nextInt(width);
@@ -69,6 +69,7 @@ public class City {
 		}
 		Zombies zombie = new Zombies(xpos, ypos, this);
 		arrayZ.add(zombie);
+
 
 	}
 
@@ -116,33 +117,32 @@ public class City {
 		{
 			arrayZ.get(j).moveZombie();
 		}
-
 		}
 
 	/**
 	 * Draw the buildings and all humans.
 	 */
-	public void draw(){
+	public void draw() {
 		/* Clear the screen */
 		ZombieSim.dp.clear(Color.black);
 		drawWalls();
 		ZombieSim.dp.setPenColor(Color.GREEN);//sets the color of the humans
-		for(int i =0; i<arrayH.size(); i++)//goes through the loop to draw each human at its coordinates
+		for (int i = 0; i < arrayH.size(); i++)//goes through the loop to draw each human at its coordinates
 		{
 			int x = arrayH.get(i).getXcoord();
 			int y = arrayH.get(i).getYcoord();
 			ZombieSim.dp.drawDot(x, y);
 
 		}
-		for(int j =0; j< arrayZ.size(); j++) {
+		for (int j = 0; j < arrayZ.size(); j++) {
 
-			ZombieSim.dp.setPenColor(Color.yellow);
+			ZombieSim.dp.setPenColor(Color.red);
 			int x = arrayZ.get(j).getXcoord();
 			int y = arrayZ.get(j).getYcoord();
 			ZombieSim.dp.drawDot(x, y);
 		}
+	}
 
-		}
 	/**
 	 * Draw the buildings.
 	 * First set the color for drawing, then draw a dot at each space
