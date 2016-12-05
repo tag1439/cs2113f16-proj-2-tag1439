@@ -1,0 +1,11 @@
+15 / 15 pts  Program compiles
+10 / 10 pts  runs without errors
+10 / 10 pts  Humans appear on screen and move randomly
+5 / 5 pts  Humans avoid zombies within 10 spaces
+10 / 10 pts  Zombies appear on screen and move randomly
+10 / 10 pts  Zombies transform adjacent humans into zombies
+10 / 10 pts  Clicking inside panel adds a zombie and pressing space pauses program
+20 / 20 pts Good OOP design, comments, and style
+10 / 10 pts  Writeup and UML diagram
+0 / 5 pts  Bonus for interesting extra feature
+Total: 100 / 100 points
